@@ -28,17 +28,13 @@
 <script>
 // YAYINA ALMADAN ÖNCE: aşağıdaki numarayı ülke koduyla, + işareti olmadan değiştirin. Örn. 905xxxxxxxxx
 const WHATSAPP_NUMBER = "905396723952";
-const products = [
- {name:"Zarif Tesettür Takım",cat:"tesettur",desc:"Şık ve rahat kombin",price:"₺ — fiyat ekleyin",img:"images/kagan-hero.jpg",tag:"TESettür"},
- {name:"Günlük Uzun Tunik",cat:"tesettur",desc:"Günlük kullanıma uygun",price:"₺ — fiyat ekleyin",img:"images/kagan-hero.jpg",tag:"YENİ"},
- {name:"Modern Günlük Kombin",cat:"kadin",desc:"Günün her anına",price:"₺ — fiyat ekleyin",img:"images/kagan-hero.jpg",tag:"KADIN"},
- {name:"Zarif Elbise",cat:"kadin",desc:"Şık ve zamansız görünüm",price:"₺ — fiyat ekleyin",img:"images/kagan-hero.jpg",tag:"FAVORİ"},
- {name:"Rahat Ev Giyim",cat:"icgiyim",desc:"Yumuşak ve konforlu",price:"₺ — fiyat ekleyin",img:"images/kagan-siyah-takim.jpg",tag:"KONFOR"},
- {name:"Saten Gecelik",cat:"icgiyim",desc:"Zarif ev giyim seçeneği",price:"₺ — fiyat ekleyin",img:"images/kagan-siyah-takim.jpg",tag:"İÇ GİYİM"},
- {name:"Mevsimlik Dış Giyim",cat:"tesettur",desc:"Katmanlı kombinlere uygun",price:"₺ — fiyat ekleyin",img:"images/kagan-hero.jpg",tag:"SEZON"},
- {name:"Şık Bluz",cat:"kadin",desc:"Kolay kombinlenebilir",price:"₺ — fiyat ekleyin",img:"images/kagan-hero.jpg",tag:"YENİ"}
+ const products = [
+  {
+    name: "Bordo Çizgili Beyaz Gömlek",
+    cat: "kadin",
+    desc: "Bedenler: S, M, L, XL",
+    price: "₺690",
+    img: "bordo-cizgili-gomlek.jpg",
+    tag: "YENİ"
+  }
 ];
-function waUrl(message){if(!/^90\d{10}$/.test(WHATSAPP_NUMBER)) return 'https://wa.me/?text='+encodeURIComponent('Merhaba, Kağan Giyim web sitesi hakkında bilgi almak istiyorum.');return 'https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent(message)}
-function render(filter='hepsi'){const grid=document.getElementById('productGrid');const list=products.filter(p=>filter==='hepsi'||p.cat===filter);grid.innerHTML=list.map(p=>`<article class="product-card"><div class="product-img"><img loading="lazy" src="${p.img}" alt="${p.name}"><span class="tag">${p.tag}</span></div><div class="product-info"><h3>${p.name}</h3><p>${p.desc}</p><div class="price-row"><span class="price">${p.price}</span><button class="order" data-product="${p.name}">WhatsApp'tan sor ↗</button></div></div></article>`).join('')||'<p class="empty">Bu kategoride henüz ürün yok.</p>';grid.querySelectorAll('.order').forEach(b=>b.addEventListener('click',()=>window.open(waUrl('Merhaba, Kağan Giyim sitesindeki “'+b.dataset.product+'” ürünü hakkında bilgi almak istiyorum. Fiyat, beden ve stok durumunu öğrenebilir miyim?'),'_blank','noopener')))}
-document.getElementById('filters').addEventListener('click',e=>{const b=e.target.closest('[data-filter]');if(!b)return;document.querySelectorAll('.filter').forEach(x=>x.classList.toggle('active',x===b));render(b.dataset.filter)});document.querySelectorAll('[data-jump]').forEach(a=>a.addEventListener('click',()=>{const f=a.dataset.jump;document.querySelectorAll('.filter').forEach(x=>x.classList.toggle('active',x.dataset.filter===f));render(f)}));document.querySelectorAll('.wa-link').forEach(a=>{a.href=waUrl('Merhaba, Kağan Giyim hakkında bilgi almak istiyorum.');a.addEventListener('click',e=>{if(!/^90\d{10}$/.test(WHATSAPP_NUMBER)){e.preventDefault();alert('WhatsApp siparişlerini etkinleştirmek için index.html dosyasındaki WHATSAPP_NUMBER alanına numaranızı yazın. Örnek biçim: 905xxxxxxxxx');}})});document.getElementById('menuBtn').addEventListener('click',()=>document.getElementById('navLinks').classList.toggle('open'));document.querySelectorAll('#navLinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navLinks').classList.remove('open')));document.getElementById('year').textContent=new Date().getFullYear();render();
-</script></body></html>
